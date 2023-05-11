@@ -24,12 +24,15 @@ fi
 # Установка английской локали
 sudo sed -i 's/^#\s*\(en_US.UTF-8\)/\1/' /etc/locale.gen
 sudo locale-gen
+sleep 5s
 
 # Установка ohmyzsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" -unattended
+sleep 5s
 
 # Скачивание и замена файла .zshrc
 curl -o ~/.zshrc https://nextcloud.2admins.ru/index.php/s/yocxf9anHaxYAK6/download/.zshrc
+sleep 5s
 
 # Настройка zsh
 exec zsh
