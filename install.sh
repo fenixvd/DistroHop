@@ -29,10 +29,10 @@ sudo locale-gen
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" -unattended
 
 # Скачивание и замена файла .zshrc
-curl -o ~/.zshrc https://nextcloud.2admins.ru/index.php/s/yocxf9anHaxYAK6
+curl -o ~/.zshrc https://nextcloud.2admins.ru/index.php/s/yocxf9anHaxYAK6/download/.zshrc
 
 # Настройка zsh
-source ~/.zshrc
+exec zsh
 
 # Установка zsh оболочкой по умолчанию
 if [ -e /bin/zsh ]; then
