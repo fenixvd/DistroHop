@@ -31,7 +31,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 sleep 5s
 
 # Скачивание и замена файла .zshrc
-curl -o ~/.zshrc https://raw.githubusercontent.com/fenix_vd/dotfiles/master/.zshrc
+curl -o ~/.zshrc https://raw.githubusercontent.com/fenixvd/dotfiles/master/.zshrc
 sleep 5s
 
 # Настройка zsh
