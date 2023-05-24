@@ -6,6 +6,12 @@ if [ -e /etc/debian_version ]; then
   if [ -e /usr/bin/apt-get ]; then
     sudo apt-get install zsh mc wget curl telnet nano neofetch -y
   fi
+  #Установка для Alt Linux
+  elif [ -e /etc/os-release ]; then
+  # Установка софта для Alt Linux
+  if [ -e /usr/bin/epm ]; then
+   epmi zsh mc wget curl telnet nano neofetch -y
+  fi
 elif [ -e /etc/redhat-release ]; then
   # Установка софта для CentOS/Oracle Linux/Red Hat
   if [ -e /usr/bin/yum ]; then
