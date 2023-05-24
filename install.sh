@@ -6,7 +6,7 @@ if [ -e /etc/debian_version ]; then
   if [ -e /usr/bin/apt-get ]; then
     sudo apt-get install zsh mc wget curl telnet nano neofetch -y
   fi
-  #Установка для Alt Linux
+   # Установка для Alt Linux
   elif [ -e /etc/os-release ]; then
   # Установка софта для Alt Linux
   if [ -e /usr/bin/epm ]; then
