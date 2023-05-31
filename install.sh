@@ -23,8 +23,14 @@ elif [ -e /etc/redhat-release ]; then
   fi
   # Установка софта для OpenSUSE
   if [ -e /usr/bin/zypper ]; then
-    sudo zypper install zsh mc wget curl telnet neofetch -y
+    sudo zypper install zsh mc wget curl telnet nano neofetch -y
   fi
+  elif [ -f /etc/arch-release ]; then
+    DISTRIBUTION="arch"
+    sudo pacman -S zsh mc wget curl telnet nano neofetch
+else
+    echo "Дистрибутив не поддерживается."
+    exit 1
 fi
 
 # Установка английской локали
@@ -34,11 +40,9 @@ sleep 5s
 
 # Установка ohmyzsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-sleep 5s
 
 # Скачивание и замена файла .zshrc
 curl -o ~/.zshrc https://raw.githubusercontent.com/fenixvd/dotfiles/master/.zshrc
-sleep 5s
 
 # Настройка zsh
 exec zsh
