@@ -33,10 +33,17 @@ else
     exit 1
 fi
 
-# Установка английской локали
-sudo sed -i 's/^#\s*\(en_US.UTF-8\)/\1/' /etc/locale.gen
-sudo locale-gen
-sleep 5s
+# Выбор и установка локали
+echo "Выберите локаль:"
+echo "1) en_US.UTF-8"
+echo "2) ru_RU.UTF-8"
+
+read -p "Выберите локаль: " choice
+case $choice in
+    1) sudo update-locale LANG=en_US.UTF-8;;
+    2) sudo update-locale LANG=ru_RU.UTF-8;;
+esac
+echo "Локаль $choice установлена"
 
 # Установка ohmyzsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
