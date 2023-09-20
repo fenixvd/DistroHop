@@ -1,49 +1,100 @@
 #!/bin/bash
 
-# Определение дистрибутива и установка софта
-if [ -e /etc/debian_version ]; then
-  # Установка софта для Debian/Ubuntu/Mint
-  if [ -e /usr/bin/apt-get ]; then
-    sudo apt-get install zsh mc wget curl telnet nano neofetch -y
-  fi
-   # Установка для Alt Linux
-  elif [ -e /etc/os-release ]; then
-  # Установка софта для Alt Linux
-  if [ -e /usr/bin/epm ]; then
-   epmi zsh mc wget curl telnet nano neofetch -y
-  fi
-elif [ -e /etc/redhat-release ]; then
-  # Установка софта для CentOS/Oracle Linux/Red Hat
-  if [ -e /usr/bin/yum ]; then
-    sudo yum install zsh mc wget curl telnet nano neofetch -y
-    fi
-  # Установка софта для Fedora
-  if [ -e /usr/bin/dnf ]; then
-    sudo dnf install zsh mc wget curl telnet nano neofetch  -y
-  fi
-  # Установка софта для OpenSUSE
-  if [ -e /usr/bin/zypper ]; then
-    sudo zypper install zsh mc wget curl telnet nano neofetch -y
-  fi
-  elif [ -f /etc/arch-release ]; then
-    DISTRIBUTION="arch"
-    sudo pacman -S zsh mc wget curl telnet nano neofetch
+# Определение дистрибутива
+distro=""
+if [ -f /etc/debian_version ]; then
+    distro="Debian"
+elif [ -f /etc/centos-release ]; then
+    distro="CentOS"
+elif [ -f /etc/redhat-release ]; then
+    distro="Red Hat"
+elif [ -f /etc/fedora-release ]; then
+    distro="Fedora"
+elif [ -f /etc/oracle-release ]; then
+    distro="Oracle Linux"
+elif [ -f /etc/SuSE-release ]; then
+    distro="openSUSE"
+elif [ -f /etc/arch-release ]; then
+    distro="Arch Linux"
 else
-    echo "Дистрибутив не поддерживается."
+    echo "Не удалось определить дистрибутив"
     exit 1
 fi
 
-# Выбор и установка локали
-echo "Выберите локаль:"
-echo "1) en_US.UTF-8"
-echo "2) ru_RU.UTF-8"
+echo "Определен дистрибутив: $distro"
 
-read -p "Выберите локаль: " choice
-case $choice in
-    1) sudo update-locale LANG=en_US.UTF-8;;
-    2) sudo update-locale LANG=ru_RU.UTF-8;;
-esac
-echo "Локаль $choice установлена"
+# Обновление пакетов в зависимости от дистрибутива
+if [ "$distro" == "Debian" ] || [ "$distro" == "Ubuntu" ] || [ "$distro" == "Linux Mint" ]; then
+    apt update
+    apt upgrade -y
+elif [ "$distro" == "CentOS" ] || [ "$distro" == "Oracle Linux" ] || [ "$distro" == "Red Hat" ]; then
+    yum update -y
+elif [ "$distro" == "Fedora" ]; then
+    dnf update -y
+elif [ "$distro" == "openSUSE" ]; then
+    zypper update -y
+elif [ "$distro" == "Arch Linux" ]; then
+    pacman -Syu --noconfirm
+else
+    echo "Не удалось обновить пакеты"
+    exit 1
+fi
+
+echo "Обновлены пакеты для дистрибутива: $distro"
+
+# Установка Zsh и остальной софт в зависимости от дистрибутива
+if [ "$distro" == "Debian" ] || [ "$distro" == "Ubuntu" ] || [ "$distro" == "Linux Mint" ]; then
+    apt install -y zsh mc wget curl telnet nano neofetch
+elif [ "$distro" == "CentOS" ] || [ "$distro" == "Oracle Linux" ] || [ "$distro" == "Red Hat" ]; then
+    yum install -y zsh mc wget curl telnet nano neofetch
+elif [ "$distro" == "Fedora" ]; then
+    dnf install -y zsh mc wget curl telnet nano neofetch
+elif [ "$distro" == "openSUSE" ]; then
+    zypper install -y zsh mc wget curl telnet nano neofetch
+elif [ "$distro" == "Arch Linux" ]; then
+    pacman -S --noconfirm zsh mc wget curl telnet nano neofetch
+else
+    echo "Не удалось установить Zsh"
+    exit 1
+fi
+
+echo "Установлен Zsh для дистрибутива: $distro"
+
+
+# Выбор локали в зависимости от дистрибутива
+locale=""
+if [ "$distro" == "Debian" ] || [ "$distro" == "Ubuntu" ] || [ "$distro" == "Linux Mint" ]; then
+    locale-gen ru_RU.UTF-8
+    locale-gen en_US.UTF-8
+    dpkg-reconfigure locales
+    locale="ru_RU.UTF-8"
+elif [ "$distro" == "CentOS" ] || [ "$distro" == "Oracle Linux" ] || [ "$distro" == "Red Hat" ]; then
+    echo "LANG=ru_RU.UTF-8" > /etc/locale.conf
+    echo "LANG=en_US.UTF-8" >> /etc/locale.conf
+    localectl set-locale LANG=ru_RU.UTF-8
+    localectl set-locale LANG=en_US.UTF-8
+    locale="ru_RU.UTF-8"
+elif [ "$distro" == "Fedora" ]; then
+    echo "LANG=ru_RU.UTF-8" > /etc/locale.conf
+    echo "LANG=en_US.UTF-8" >> /etc/locale.conf
+    localectl set-locale LANG=ru_RU.UTF-8
+    localectl set-locale LANG=en_US.UTF-8
+    locale="ru_RU.UTF-8"
+elif [ "$distro" == "openSUSE" ]; then
+    echo 'LC_ALL="ru_RU.UTF-8"' > /etc/default/locale
+    echo 'LC_ALL="en_US.UTF-8"' >> /etc/default/locale
+    locale="ru_RU.UTF-8"
+elif [ "$distro" == "Arch Linux" ]; then
+    echo "LANG=ru_RU.UTF-8" > /etc/locale.conf
+    echo "LANG=en_US.UTF-8" >> /etc/locale.conf
+    locale-gen
+    localectl set-locale LANG=ru_RU.UTF-8
+    localectl set-locale LANG=en_US.UTF-8
+    locale="ru_RU.UTF-8"
+else
+    echo "Не удалось выбрать локаль"
+    exit 1
+fi
 
 # Установка ohmyzsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
