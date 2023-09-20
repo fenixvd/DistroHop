@@ -2,7 +2,7 @@
 
 # Определение дистрибутива
 distro=""
-if [ -f /etc/debian_version ]; then
+if [ -f /etc/Debian_version ]; then
     distro="Debian"
 elif [ -f /etc/centos-release ]; then
     distro="CentOS"
@@ -54,7 +54,7 @@ elif [ "$distro" == "openSUSE" ]; then
 elif [ "$distro" == "Arch Linux" ]; then
     pacman -S --noconfirm zsh mc wget curl telnet nano neofetch
 else
-    echo "Не удалось установить Zsh"
+    echo "Не удалось установить Zsh и софт"
     exit 1
 fi
 
@@ -103,7 +103,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 curl -o ~/.zshrc https://raw.githubusercontent.com/fenixvd/dotfiles/master/.zshrc
 
 # Настройка zsh
-exec zsh
+source ~/.zshrc
 
 # Установка zsh оболочкой по умолчанию
 if [ -e /bin/zsh ]; then
