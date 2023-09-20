@@ -2,7 +2,7 @@
 
 # Определение дистрибутива
 distro=""
-if [ -f /etc/Debian_version ]; then
+if [ -f /etc/debian_version ]; then
     distro="Debian"
 elif [ -f /etc/centos-release ]; then
     distro="CentOS"
