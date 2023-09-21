@@ -12,7 +12,7 @@ elif [ -f /etc/fedora-release ]; then
     distro="Fedora"
 elif [ -f /etc/oracle-release ]; then
     distro="Oracle Linux"
-elif [ -f /etc/SuSE-release ]; then
+elif [ -f /etc/SUSE-brand ]; then
     distro="openSUSE"
 elif [ -f /etc/arch-release ]; then
     distro="Arch Linux"
