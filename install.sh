@@ -25,16 +25,16 @@ echo "Определен дистрибутив: $distro"
 
 # Обновление пакетов в зависимости от дистрибутива
 if [ "$distro" == "Debian" ] || [ "$distro" == "Ubuntu" ] || [ "$distro" == "Linux Mint" ]; then
-    apt update
-    apt upgrade -y
+    sudo apt update
+    sudo apt upgrade -y
 elif [ "$distro" == "CentOS" ] || [ "$distro" == "Oracle Linux" ] || [ "$distro" == "Red Hat" ]; then
-    yum update -y
+    sudo yum update -y
 elif [ "$distro" == "Fedora" ]; then
-    dnf update -y
+    sudo dnf update -y
 elif [ "$distro" == "openSUSE" ]; then
-    zypper update -y
+    sudo zypper update -y
 elif [ "$distro" == "Arch Linux" ]; then
-    pacman -Syu --noconfirm
+    sudo pacman -Syu --noconfirm
 else
     echo "Не удалось обновить пакеты"
     exit 1
@@ -44,15 +44,15 @@ echo "Обновлены пакеты для дистрибутива: $distro"
 
 # Установка Zsh и остальной софт в зависимости от дистрибутива
 if [ "$distro" == "Debian" ] || [ "$distro" == "Ubuntu" ] || [ "$distro" == "Linux Mint" ]; then
-    apt install -y zsh mc wget curl telnet nano neofetch
+    sudo apt install -y zsh mc wget curl telnet nano neofetch
 elif [ "$distro" == "CentOS" ] || [ "$distro" == "Oracle Linux" ] || [ "$distro" == "Red Hat" ]; then
-    yum install -y zsh mc wget curl telnet nano neofetch
+    sudo yum install -y zsh mc wget curl telnet nano neofetch
 elif [ "$distro" == "Fedora" ]; then
-    dnf install -y zsh mc wget curl telnet nano neofetch
+    sudo dnf install -y zsh mc wget curl telnet nano neofetch
 elif [ "$distro" == "openSUSE" ]; then
-    zypper install -y zsh mc wget curl telnet nano neofetch
+    sudo zypper install -y zsh mc wget curl telnet nano neofetch
 elif [ "$distro" == "Arch Linux" ]; then
-    pacman -S --noconfirm zsh mc wget curl telnet nano neofetch
+    sudo pacman -S --noconfirm zsh mc wget curl telnet nano neofetch
 else
     echo "Не удалось установить Zsh и софт"
     exit 1
@@ -64,33 +64,33 @@ echo "Установлен Zsh для дистрибутива: $distro"
 # Выбор локали в зависимости от дистрибутива
 locale=""
 if [ "$distro" == "Debian" ] || [ "$distro" == "Ubuntu" ] || [ "$distro" == "Linux Mint" ]; then
-    locale-gen ru_RU.UTF-8
-    locale-gen en_US.UTF-8
-    dpkg-reconfigure locales
+    sudo locale-gen ru_RU.UTF-8
+    sudo locale-gen en_US.UTF-8
+    sudo dpkg-reconfigure locales
     locale="ru_RU.UTF-8"
 elif [ "$distro" == "CentOS" ] || [ "$distro" == "Oracle Linux" ] || [ "$distro" == "Red Hat" ]; then
-    echo "LANG=ru_RU.UTF-8" > /etc/locale.conf
-    echo "LANG=en_US.UTF-8" >> /etc/locale.conf
-    localectl set-locale LANG=ru_RU.UTF-8
-    localectl set-locale LANG=en_US.UTF-8
-    locale="ru_RU.UTF-8"
+    sudo echo "LANG=ru_RU.UTF-8" > /etc/locale.conf
+    sudo echo "LANG=en_US.UTF-8" >> /etc/locale.conf
+    sudo localectl set-locale LANG=ru_RU.UTF-8
+    sudo localectl set-locale LANG=en_US.UTF-8
+    sudo locale="ru_RU.UTF-8"
 elif [ "$distro" == "Fedora" ]; then
-    echo "LANG=ru_RU.UTF-8" > /etc/locale.conf
-    echo "LANG=en_US.UTF-8" >> /etc/locale.conf
-    localectl set-locale LANG=ru_RU.UTF-8
-    localectl set-locale LANG=en_US.UTF-8
-    locale="ru_RU.UTF-8"
+    sudo echo "LANG=ru_RU.UTF-8" > /etc/locale.conf
+    sudo echo "LANG=en_US.UTF-8" >> /etc/locale.conf
+    sudo localectl set-locale LANG=ru_RU.UTF-8
+    sudo localectl set-locale LANG=en_US.UTF-8
+    sudo locale="ru_RU.UTF-8"
 elif [ "$distro" == "openSUSE" ]; then
-    echo 'LC_ALL="ru_RU.UTF-8"' > /etc/default/locale
-    echo 'LC_ALL="en_US.UTF-8"' >> /etc/default/locale
-    locale="ru_RU.UTF-8"
+    sudo echo 'LC_ALL="ru_RU.UTF-8"' > /etc/default/locale
+    sudo echo 'LC_ALL="en_US.UTF-8"' >> /etc/default/locale
+    sudo locale="ru_RU.UTF-8"
 elif [ "$distro" == "Arch Linux" ]; then
-    echo "LANG=ru_RU.UTF-8" > /etc/locale.conf
-    echo "LANG=en_US.UTF-8" >> /etc/locale.conf
-    locale-gen
-    localectl set-locale LANG=ru_RU.UTF-8
-    localectl set-locale LANG=en_US.UTF-8
-    locale="ru_RU.UTF-8"
+    sudo echo "LANG=ru_RU.UTF-8" > /etc/locale.conf
+    sudo echo "LANG=en_US.UTF-8" >> /etc/locale.conf
+    sudo locale-gen
+    sudo localectl set-locale LANG=ru_RU.UTF-8
+    sudo localectl set-locale LANG=en_US.UTF-8
+    sudo locale="ru_RU.UTF-8"
 else
     echo "Не удалось выбрать локаль"
     exit 1
