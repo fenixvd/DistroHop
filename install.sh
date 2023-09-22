@@ -103,7 +103,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 curl -o ~/.zshrc https://raw.githubusercontent.com/fenixvd/dotfiles/master/.zshrc
 
 # Настройка zsh
-source ~/.zshrc
+exec zsh
 
 # Установка zsh оболочкой по умолчанию
 if [ -e /bin/zsh ]; then
