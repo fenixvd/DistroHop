@@ -41,6 +41,7 @@ else
 fi
 
 # Обновление flatpak приложений
+flatpak update -y 
 
 
 echo "Обновлены пакеты для дистрибутива: $distro"
