@@ -25,8 +25,7 @@ echo "Определен дистрибутив: $distro"
 
 # Обновление пакетов в зависимости от дистрибутива
 if [ "$distro" == "Debian" ] || [ "$distro" == "Ubuntu" ] || [ "$distro" == "Linux Mint" ]; then
-    sudo apt update
-    sudo apt upgrade -y
+    sudo apt update && sudo apt upgrade -y
 elif [ "$distro" == "CentOS" ] || [ "$distro" == "Oracle Linux" ] || [ "$distro" == "Red Hat" ]; then
     sudo yum update -y
 elif [ "$distro" == "Fedora" ]; then
