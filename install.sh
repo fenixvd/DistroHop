@@ -64,7 +64,6 @@ locale=""
 if [ "$distro" == "Debian" ] || [ "$distro" == "Ubuntu" ] || [ "$distro" == "Linux Mint" ]; then
     sudo locale-gen ru_RU.UTF-8
     sudo locale-gen en_US.UTF-8
-    sudo dpkg-reconfigure locales
     locale="ru_RU.UTF-8"
 elif [ "$distro" == "CentOS" ] || [ "$distro" == "Oracle Linux" ] || [ "$distro" == "Red Hat" ]; then
     sudo echo "LANG=ru_RU.UTF-8" > /etc/locale.conf
