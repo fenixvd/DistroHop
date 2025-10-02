@@ -1,9 +1,28 @@
-### Использование
+# DistroHop
 
-Для использования скрипта, просто склонируйте репозиторий на ваш компьютер. После перейдите в папку склонированного репозитория и запустите файл скрипта.
-1) git clone https://github.com/fenixvd/DistroHop.git
-2) cd DistroHop/
-3) chmod +x install.sh
-4) ./install.sh
+**Автоматизированная установка Zsh, Oh My Zsh и утилит для вашего Linux-дистрибутива.
 
-Вы великолепны!
+---
+
+## Особенности
+
+- Поддержка популярных дистрибутивов: Debian, Ubuntu, Linux Mint, Fedora, CentOS, Arch Linux, openSUSE, Alpine, Oracle Linux.
+- Все конфиги и .oh-my-zsh устанавливаются для пользователя, вызвавшего `sudo`, а не для root.
+- Безопасный режим исполнения (`set -euo pipefail`).
+- Автоматическое определение дистрибутива.
+- Установка: Zsh, Oh My Zsh, mc, wget, curl, telnet, nano, fastfetch.
+- Настройка локалей (ru_RU.UTF-8 и en_US.UTF-8).
+- Загрузка кастомного `.zshrc` из [fenixvd/dotfiles](https://github.com/fenixvd/dotfiles).
+- Смена shell на Zsh для вашего пользователя.
+- CLI-флаги для автоматизации: `--yes`, `--no-prompt`, `--only-zsh`.
+- Логирование в файл (`setup_zsh_<DATE>.log`).
+
+---
+
+## Использование
+
+1. Клонируйте репозиторий:
+   ```sh
+   git clone https://github.com/fenixvd/DistroHop.git
+   cd DistroHop/
+   chmod +x install.sh
