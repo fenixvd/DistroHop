@@ -20,7 +20,6 @@
 
 ## Использование
 
-1. Клонируйте репозиторий:
    ```sh
    git clone https://github.com/fenixvd/DistroHop.git
    cd DistroHop/
