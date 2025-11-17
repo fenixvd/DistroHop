@@ -150,39 +150,6 @@ install_packages() {
   echo -e "${GREEN}[+] Пакеты установлены${NC}"
 }
 
-# === Настройка локалей ===
-setup_locales() {
-  need_cmd locale-gen || true
-  if $NO_PROMPT || $AUTO_YES; then answer="y"; else
-    echo -e "${YELLOW}[?] Настроить локали ru_RU.UTF-8 и en_US.UTF-8? [Y/n]${NC}"
-    read -r answer
-  fi
-  [[ "$answer" =~ ^([yY]$|) ]] || return
-
-  case "$distro" in
-    Debian|Ubuntu|Linux\ Mint)
-      locale-gen ru_RU.UTF-8 en_US.UTF-8 ;;
-    CentOS|Oracle\ Linux|Red\ Hat|Fedora)
-      echo "LANG=en_US.UTF-8" > /etc/locale.conf
-      localectl set-locale LANG=ru_RU.UTF-8 ;;
-    openSUSE)
-      echo 'LC_ALL="ru_RU.UTF-8"' > /etc/default/locale
-      echo 'LC_ALL="en_US.UTF-8"' >> /etc/default/locale ;;
-    Arch*)
-      echo "LANG=en_US.UTF-8" > /etc/locale.conf
-      locale-gen
-      localectl set-locale LANG=ru_RU.UTF-8 ;;
-    Alpine)
-      setup-timezone -z Europe/Moscow
-      echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
-      echo "ru_RU.UTF-8 UTF-8" >> /etc/locale.gen
-      locale-gen ;;
-    *)
-      echo -e "${RED}[-] Неизвестный дистрибутив. Пропущена настройка локалей.${NC}"
-      return 1 ;;
-  esac
-  echo -e "${GREEN}[+] Локали настроены${NC}"
-}
 
 # === Установка Oh My Zsh для правильного пользователя ===
 install_ohmyzsh() {
@@ -242,7 +209,6 @@ main() {
   else
     update_system
     install_packages
-    setup_locales
     install_ohmyzsh
     configure_zshrc
     change_shell
