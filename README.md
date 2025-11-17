@@ -11,7 +11,6 @@
 - Безопасный режим исполнения (`set -euo pipefail`).
 - Автоматическое определение дистрибутива.
 - Установка: Zsh, Oh My Zsh, mc, wget, curl, telnet, nano, fastfetch.
-- Настройка локалей (ru_RU.UTF-8 и en_US.UTF-8).
 - Загрузка кастомного `.zshrc` из [fenixvd/dotfiles](https://github.com/fenixvd/dotfiles).
 - Смена shell на Zsh для вашего пользователя.
 - CLI-флаги для автоматизации: `--yes`, `--no-prompt`, `--only-zsh`.
@@ -26,3 +25,4 @@
    git clone https://github.com/fenixvd/DistroHop.git
    cd DistroHop/
    chmod +x install.sh
+   sudo ./install.sh
